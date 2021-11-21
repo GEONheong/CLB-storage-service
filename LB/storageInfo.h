@@ -28,6 +28,9 @@ typedef struct storage {
     char stor_pubkey[1024];
 }storageInfo;
 
+typedef struct clinet{
+    
+}clientInfo;
 //static storageInfo *storageInfoArr = NULL;
 
 

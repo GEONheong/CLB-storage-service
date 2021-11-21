@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
 	strcpy(storageMyInfo.stor_ext,"txt");
 	strcpy(storageMyInfo.stor_id,"pi");
-	strcpy(storageMyInfo.stor_filepath,"/home/pi/Desktop/Geon/Storage/fileStore");
+	strcpy(storageMyInfo.stor_filepath,"/home/pi/Desktop/Geon/Storage/fileStore/");
 	pubKey = getPubkey();
 	strcpy(storageMyInfo.stor_pubkey,pubKey);
 

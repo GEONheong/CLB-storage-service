@@ -22,7 +22,8 @@
 
 #define MENU "<Geon's Storage Serivce>\n1.Upload File\n2.Download File\n3.Lookup Filelist\n4.Terminate Service\n"
 
-#define SUCCESS "Scuccess file"
+#define SUCCESS "Scuccess file transfer"
+#define FAIL "Fail file transfer"
 
 typedef struct storage {
     char stor_ip[15];

@@ -3,7 +3,8 @@
         "cmath": "c",
         "*.tcc": "c",
         "includeset.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "currentstorageinfo.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
 
 	pthread_create(&udpServerThr,NULL,udp_server,NULL);
 	printf("[BEFORE storageInfoArr, addr] %x\n",storageInfoArr);
-	//(void*)storageInfoArr
 
 	while (TRUE)
 	{
