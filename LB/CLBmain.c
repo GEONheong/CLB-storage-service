@@ -12,14 +12,14 @@ int client_addr_len = sizeof(client_addr);
 char buf[BUFSIZ];
 
 
-int size = 1;
+int storageCount = 1;
 
 storageInfo *storageInfoArr = NULL;
 pthread_t udpServerThr;
 
 int main(int argc, char *argv[])
 {
-	storageInfoArr = (storageInfo *)malloc(sizeof(storageInfo) * size);
+	storageInfoArr = (storageInfo *)malloc(sizeof(storageInfo) * storageCount);
 
 	if ((access_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
@@ -57,17 +57,17 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			recv(accept_sock, (storageInfo*)&storageInfoArr[size-1], sizeof(storageInfoArr[size-1]), 0);
+			recv(accept_sock, (storageInfo*)&storageInfoArr[storageCount-1], sizeof(storageInfoArr[storageCount-1]), 0);
 			
-			strcpy(storageInfoArr[size-1].stor_ip, inet_ntoa(client_addr.sin_addr));
-			printf("%s\n",storageInfoArr[size-1].stor_filepath);
-			printf("%s\n",storageInfoArr[size-1].stor_ip);
-			printf("%s\n",storageInfoArr[size-1].stor_id);
-			printf("%s\n",storageInfoArr[size-1].stor_pubkey);
-			printf("%s\n",storageInfoArr[size-1].stor_ext);
+			strcpy(storageInfoArr[storageCount-1].stor_ip, inet_ntoa(client_addr.sin_addr));
+			printf("%s\n",storageInfoArr[storageCount-1].stor_filepath);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_ip);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_id);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_pubkey);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_ext);
 
-			size ++;
-			storageInfoArr = (storageInfo*)realloc(storageInfoArr,sizeof(storageInfo)*size);
+			storageCount ++;
+			storageInfoArr = (storageInfo*)realloc(storageInfoArr,sizeof(storageInfo)*storageCount);
 			printf("[AFTER realloc, addr] %x\n", storageInfoArr);
 		}
 	}

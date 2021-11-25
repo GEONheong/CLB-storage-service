@@ -57,6 +57,12 @@ int main(int argc, char *argv[])
 			sendto(inet_sock,filename,strlen(filename)+1,0,
 				(struct sockaddr*)&server_inet,sizeof(server_inet));
 
+			if(strcmp(filename,"none") == 0){
+				printf("Wrong Input...\n");
+				printf("Input FILENAME or FILEPATH...\n");
+				continue;
+			}
+
 			//recive from CLB storageInformation
 			recvfrom(inet_sock,(storageInfo*)&currentStorageInfo,sizeof(currentStorageInfo),0,NULL,NULL);
 			// printf("%s\n",currentStorageInfo.stor_filepath);
@@ -67,10 +73,12 @@ int main(int argc, char *argv[])
 			//modify "authorized_keys" file
 			savePubkey(currentStorageInfo.stor_pubkey);
 
-			//send file to storage(use scp) and send to CLB "file send success" message
+			//send file to storage(use scp) 
 			sprintf(buf,"scp -p %s %s@%s:%s",filepath,currentStorageInfo.stor_id,currentStorageInfo.stor_ip,currentStorageInfo.stor_filepath);
 			int ret = system(buf);
 			printf("ret: %d\n",ret);
+			
+			//send to CLB "file send success" message
 			if(ret == 0){
 				sendto(inet_sock,SUCCESS,strlen(SUCCESS)+1,0,
 				(struct sockaddr*)&server_inet,sizeof(server_inet));
@@ -85,10 +93,17 @@ int main(int argc, char *argv[])
 			//input filename
 			printf("Input File Name: ");
 			gets(filename);
+			strcpy(filename,getName(filename));
 
 			//send to CLB filename
 			sendto(inet_sock,filename,strlen(filename)+1,0,
 				(struct sockaddr*)&server_inet,sizeof(server_inet));
+
+			if(strcmp(filename,"NONE") == 0){
+				printf("Wrong Input...\n");
+				printf("Input FILENAME or FILEPATH...\n");
+				continue;
+			}
 			
 			//recive from CLB storageInformation
 			recvfrom(inet_sock,(storageInfo*)&currentStorageInfo,sizeof(currentStorageInfo),0,NULL,NULL); 
@@ -96,11 +111,13 @@ int main(int argc, char *argv[])
 			//modify "authorized_keys" file
 			savePubkey(currentStorageInfo.stor_pubkey);
 
-			//send file to storage(use scp) and send to CLB "file send success" message
+			//send file to storage(use scp) 
 			strcat(currentStorageInfo.stor_filepath,filename);
 			sprintf(buf,"scp -p %s@%s:%s ./downloadFile",currentStorageInfo.stor_id,currentStorageInfo.stor_ip,currentStorageInfo.stor_filepath);
 			int ret = system(buf);
 			printf("ret: %d\n",ret);
+
+			//send to CLB "file send success" message
 			if(ret == 0){
 				sendto(inet_sock,SUCCESS,strlen(SUCCESS)+1,0,
 				(struct sockaddr*)&server_inet,sizeof(server_inet));

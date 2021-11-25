@@ -4,7 +4,8 @@
         "*.tcc": "c",
         "includeset.h": "c",
         "string.h": "c",
-        "currentstorageinfo.h": "c"
+        "currentstorageinfo.h": "c",
+        "type_traits": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

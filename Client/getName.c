@@ -11,7 +11,13 @@ char* getName(char *filepath){
 		strcpy(buf,name+1);
 	}
 	else{
-		strcpy(buf,filepath);
+		name = strrchr(filepath,'.');
+		if(name == NULL){
+			strcpy(buf,"NONE");
+		}
+		else{
+			strcpy(buf,filepath);
+		}	
 	}
 
 	return buf;

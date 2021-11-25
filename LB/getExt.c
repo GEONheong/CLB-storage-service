@@ -9,7 +9,7 @@ char* getExt(char* filename){
 
 	ext = strrchr(filename,'.');		
 	if(ext == NULL)
-		return NULL;
+		return "NONE";
 
 	strcpy(buf,ext+1);
 	

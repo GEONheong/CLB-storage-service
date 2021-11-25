@@ -28,9 +28,9 @@ typedef struct storage {
     char stor_pubkey[1024];
 }storageInfo;
 
-typedef struct clinet{
+typedef struct extSet{
     
-}clientInfo;
+}storageKind;
 //static storageInfo *storageInfoArr = NULL;
 
 
