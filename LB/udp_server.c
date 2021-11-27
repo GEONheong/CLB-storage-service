@@ -5,9 +5,9 @@ extern char *getExt(char *filename);
 extern storageInfo *storageInfoArr;
 extern int storageCount;
 
-char* docsExt[6] = {"doc","docx","html","hwp","pdf","txt"};
-char* videoExt[5] = {"avi","mkv","mov","flv","mp4","wmv"};
-char* audioExt[5] = {"mp3","wav","wma","raw","ogg"};
+// char* docsExt[6] = {"doc","docx","html","hwp","pdf","txt"};
+// char* videoExt[5] = {"avi","mkv","mov","flv","mp4","wmv"};
+// char* audioExt[5] = {"mp3","wav","wma","raw","ogg"};
 
 void *udp_server()
 {
@@ -46,8 +46,10 @@ void *udp_server()
         printf("waiting msg....\n");
         recvfrom(sock, buf, sizeof(buf), 0,
                  (struct sockaddr *)&client_in, &clientlen);
+        
+        printf("%s\n",buf);
 
-        if (strcmp(buf, SENDFILE) == 0 || strcmp(buf, GETFILE) == 0) //recv sendfile or getfile
+        if (strcmp(buf, _SENDFILE_MSG) == 0 || strcmp(buf, _GETFILE_MSG) == 0) //recv sendfile or getfile
         {
             //recv filename from client
             recvfrom(sock, buf, sizeof(buf), 0,
@@ -74,11 +76,7 @@ void *udp_server()
                      (struct sockaddr *)&client_in, &clientlen);
             printf("Msg : %s\n",buf);
         }
-        // else if(strcmp(buf,GETFILE) == 0)
-        // {
-
-        // }
-        else if (strcmp(buf, LOOKUPLIST) == 0)
+        else if (strcmp(buf, _LOOKUPLIST_MSG) == 0)
         {
         }
         else{

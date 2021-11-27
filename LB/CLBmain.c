@@ -4,6 +4,7 @@
 #define FALSE 0
 
 extern void* udp_server();
+extern void* tcp_loginServer();
 
 //tcp socket var
 int access_sock, accept_sock;
@@ -15,7 +16,7 @@ char buf[BUFSIZ];
 int storageCount = 1;
 
 storageInfo *storageInfoArr = NULL;
-pthread_t udpServerThr;
+pthread_t udpServerThr,tcploginThr;
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +31,7 @@ int main(int argc, char *argv[])
 	memset((char *)&server_addr, '\0', sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-	server_addr.sin_port = htons(atoi(argv[1]));
+	server_addr.sin_port = htons(9999);
 
 	if (bind(access_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)
 	{
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
 		perror("listen error");
 		exit(1);
 	}
-
+	pthread_create(&tcploginThr,NULL,tcp_loginServer,NULL);
 	pthread_create(&udpServerThr,NULL,udp_server,NULL);
 	printf("[BEFORE storageInfoArr, addr] %x\n",storageInfoArr);
 

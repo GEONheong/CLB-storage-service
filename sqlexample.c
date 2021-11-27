@@ -11,7 +11,7 @@ int main()
     char *server = "127.0.0.1";
     char *user = "root";
     char *password = "user";
-    char *database = "UserFileList";
+    char *database = "UserList";
 
     if (!(conn = mysql_init((MYSQL *)NULL)))
     { 
@@ -37,75 +37,106 @@ int main()
     }
     printf("select mydb suc.\n");
 
-    char* sql ="CREATE TABLE user1(\
-                    _id INT NOT NULL AUTO_INCREMENT,\
-                    file_name VARCHAR(100),\
-                    location VARCHAR(10),\
-                    first_touch DATETIME,\
-                    last_touch DATETIME,\
-                    PRIMARY KEY( _id )\
-                    )";
-
-    if(mysql_query(conn,sql)){
+    char *sql = "select id,password from allUserList where id='po05105' and password='@park8767' ";
+    int a;
+    if(a = mysql_query(conn,sql)){
         mysql_close(conn);
-        printf("create table fail.\n");
+        printf("fail fail %d\n",a);
         exit(1);
-    }
-
-    sql = "INSERT INTO user1 (file_name, location) VALUES ('text.txt','docs1')";
-    if(mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("insert item fail.\n");
-        exit(1);
-    }
-
-    sql = "INSERT INTO user1 (file_name, location, first_touch) \
-            VALUES ('ttest.txt','docs2',now())\
-            , ('a.video','video2',now())\
-            , ('c.audio','audio1',now())";
-    if(mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("insert item fail.\n");
-        exit(1);
-    }
-
-    sql = "DELETE FROM user1 WHERE file_name='ttest.txt'";
-    if(mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("delete item fail.\n");
-        exit(1);
-    }
-
-    sql = "UPDATE user1 SET location = 'video5' WHERE file_name='a.video'";
-    if(mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("delete item fail.\n");
-        exit(1);
-    }
-
-    sql = "UPDATE user1 SET last_touch = now() WHERE file_name='c.audio'";
-    if(mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("insert item fail.\n");
-        exit(1);
-    }
-
-    sql = "SELECT file_name from user1";
-    if(mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("insert item fail.\n");
-        exit(1);
+    }else{
+        printf("success %d\n",a);
     }
 
     res=mysql_store_result(conn);
     int fildes = mysql_num_fields(res);
+    int gg = mysql_num_rows(res);
 
+    printf("%d\n",fildes);
+    printf("%d\n",gg);
+
+
+    row=mysql_fetch_row(res);
+
+    // strcmp(row[0],
     while(row=mysql_fetch_row(res)){
         for(int cnt=0; cnt<fildes ;cnt++){
-            printf("%12s\n",row[cnt]);
+            printf("%s\n",row[cnt]);
+            printf("cnt : %d\n",cnt);
         }
     }
 
     mysql_free_result(res);
-    mysql_close(conn);
+
+    // char* sql ="CREATE TABLE user1(\
+    //                 _id INT NOT NULL AUTO_INCREMENT,\
+    //                 file_name VARCHAR(100),\
+    //                 location VARCHAR(10),\
+    //                 first_touch DATETIME,\
+    //                 last_touch DATETIME,\
+    //                 PRIMARY KEY( _id )\
+    //                 )";
+
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("create table fail.\n");
+    //     exit(1);
+    // }
+
+    // sql = "INSERT INTO user1 (file_name, location) VALUES ('text.txt','docs1')";
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("insert item fail.\n");
+    //     exit(1);
+    // }
+
+    // sql = "INSERT INTO user1 (file_name, location, first_touch) \
+    //         VALUES ('ttest.txt','docs2',now())\
+    //         , ('a.video','video2',now())\
+    //         , ('c.audio','audio1',now())";
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("insert item fail.\n");
+    //     exit(1);
+    // }
+
+    // sql = "DELETE FROM user1 WHERE file_name='ttest.txt'";
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("delete item fail.\n");
+    //     exit(1);
+    // }
+
+    // sql = "UPDATE user1 SET location = 'video5' WHERE file_name='a.video'";
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("delete item fail.\n");
+    //     exit(1);
+    // }
+
+    // sql = "UPDATE user1 SET last_touch = now() WHERE file_name='c.audio'";
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("insert item fail.\n");
+    //     exit(1);
+    // }
+
+    // sql = "SELECT _id,file_name from user1";
+    // if(mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("insert item fail.\n");
+    //     exit(1);
+    // }
+
+    // res=mysql_store_result(conn);
+    // int fildes = mysql_num_fields(res);
+
+    // while(row=mysql_fetch_row(res)){
+    //     for(int cnt=0; cnt<fildes ;cnt++){
+    //         printf("%s\n",row[cnt]);
+    //         printf("cnt : %d\n",cnt);
+    //     }
+    // }
+
+    // mysql_free_result(res);
+    // mysql_close(conn);
 }

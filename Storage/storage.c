@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	memset((char *)&server_inet, '\0', sizeof(server_inet));
 	server_inet.sin_family = AF_INET;
 	server_inet.sin_addr.s_addr = inet_addr(LB_IP);
-	server_inet.sin_port = htons(atoi(argv[1]));
+	server_inet.sin_port = htons(9999);
 
 	if (connect(sendInfoSock, (struct sockaddr *)&server_inet, sizeof(server_inet)) == -1)
 	{

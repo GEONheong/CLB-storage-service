@@ -15,10 +15,17 @@
 
 #define LB_IP "127.0.0.1"
 
-#define SENDFILE "1"
-#define GETFILE "2"
-#define LOOKUPLIST "3"
-#define SERVICEEND "4"
+#define _SENDFILE_MSG "_sendfile"
+#define _GETFILE_MSG "_getfile"
+#define _LOOKUPLIST_MSG "_lookuplist"
+#define _SERVICEND_MSG "_servicend"
+#define _SIGNIN_MSG "_signin"
+#define _SIGNUP_MSG "_signup"
+
+#define _SIGNIN_SUCCESS "Success sign in"
+#define _SIGNIN_FAIL "Fail sign in"
+#define _SIGNUP_SUCCESS "Success sign up"
+#define _SIGNUP_FAIL "Fail sign up"
 
 typedef struct storage {
     char stor_ip[15];
@@ -28,9 +35,9 @@ typedef struct storage {
     char stor_pubkey[1024];
 }storageInfo;
 
-typedef struct extSet{
-    
-}storageKind;
-//static storageInfo *storageInfoArr = NULL;
+typedef struct user{
+    char user_id[50];
+    char user_password[50];
+}userInfo;
 
 

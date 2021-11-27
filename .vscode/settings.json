@@ -5,7 +5,8 @@
         "includeset.h": "c",
         "string.h": "c",
         "currentstorageinfo.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "storageinfo.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
