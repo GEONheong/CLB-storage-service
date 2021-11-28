@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mariadb/mysql.h>
+#include<string.h>
 
 int main()
 {
@@ -11,7 +12,7 @@ int main()
     char *server = "127.0.0.1";
     char *user = "root";
     char *password = "user";
-    char *database = "UserList";
+    char *database = "UserFileList";
 
     if (!(conn = mysql_init((MYSQL *)NULL)))
     { 
@@ -37,35 +38,35 @@ int main()
     }
     printf("select mydb suc.\n");
 
-    char *sql = "select id,password from allUserList where id='po05105' and password='@park8767' ";
-    int a;
-    if(a = mysql_query(conn,sql)){
-        mysql_close(conn);
-        printf("fail fail %d\n",a);
-        exit(1);
-    }else{
-        printf("success %d\n",a);
-    }
+    // char *sql = "select id,password from allUserList where id='po05105' and password='@park8767' ";
+    // int a;
+    // if(a = mysql_query(conn,sql)){
+    //     mysql_close(conn);
+    //     printf("fail fail %d\n",a);
+    //     exit(1);
+    // }else{
+    //     printf("success %d\n",a);
+    // }
 
-    res=mysql_store_result(conn);
-    int fildes = mysql_num_fields(res);
-    int gg = mysql_num_rows(res);
+    // res=mysql_store_result(conn);
+    // int fildes = mysql_num_fields(res);
+    // int gg = mysql_num_rows(res);
 
-    printf("%d\n",fildes);
-    printf("%d\n",gg);
+    // printf("%d\n",fildes);
+    // printf("%d\n",gg);
 
 
-    row=mysql_fetch_row(res);
+    // row=mysql_fetch_row(res);
 
-    // strcmp(row[0],
-    while(row=mysql_fetch_row(res)){
-        for(int cnt=0; cnt<fildes ;cnt++){
-            printf("%s\n",row[cnt]);
-            printf("cnt : %d\n",cnt);
-        }
-    }
+    // // strcmp(row[0],
+    // while(row=mysql_fetch_row(res)){
+    //     for(int cnt=0; cnt<fildes ;cnt++){
+    //         printf("%s\n",row[cnt]);
+    //         printf("cnt : %d\n",cnt);
+    //     }
+    // }
 
-    mysql_free_result(res);
+    // mysql_free_result(res);
 
     // char* sql ="CREATE TABLE user1(\
     //                 _id INT NOT NULL AUTO_INCREMENT,\
@@ -120,23 +121,34 @@ int main()
     //     exit(1);
     // }
 
-    // sql = "SELECT _id,file_name from user1";
-    // if(mysql_query(conn,sql)){
-    //     mysql_close(conn);
-    //     printf("insert item fail.\n");
-    //     exit(1);
-    // }
+    char buf[BUFSIZ];
+    char tempbuf[256];
+    char* sql = "SELECT file_name,first_touch,last_touch from park8767";
+    if(mysql_query(conn,sql)){
+        mysql_close(conn);
+        printf("insert item fail.\n");
+        exit(1);
+    }
 
-    // res=mysql_store_result(conn);
-    // int fildes = mysql_num_fields(res);
+    res=mysql_store_result(conn);
+    int fildes = mysql_num_fields(res);
 
-    // while(row=mysql_fetch_row(res)){
-    //     for(int cnt=0; cnt<fildes ;cnt++){
-    //         printf("%s\n",row[cnt]);
-    //         printf("cnt : %d\n",cnt);
-    //     }
-    // }
+    sprintf(buf,"|%-15s|%-20s|%-20s|\n","FileName","First-Touch","Last-Touch");
+    strcat(buf,"+---------------+--------------------+--------------------+\n");
+    
+            
+    while(row=mysql_fetch_row(res)){
+        for(int cnt=0; cnt<fildes ;cnt++){
+            // printf("%s\n",row[cnt]);
+            // printf("cnt : %d\n",cnt);
+            if(cnt == 2){
+                sprintf(tempbuf,"|%-15s|%-20s|%-20s|\n",row[0],row[1],row[2]);
+                strcat(buf,tempbuf);
+            }
+        }
+    }
 
-    // mysql_free_result(res);
-    // mysql_close(conn);
+    printf("%s",buf);
+    mysql_free_result(res);
+    mysql_close(conn);
 }

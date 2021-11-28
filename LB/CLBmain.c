@@ -12,8 +12,7 @@ struct sockaddr_in server_addr, client_addr;
 int client_addr_len = sizeof(client_addr);
 char buf[BUFSIZ];
 
-
-int storageCount = 1;
+int storageCount = 2;
 
 storageInfo *storageInfoArr = NULL;
 pthread_t udpServerThr,tcploginThr;
@@ -21,6 +20,12 @@ pthread_t udpServerThr,tcploginThr;
 int main(int argc, char *argv[])
 {
 	storageInfoArr = (storageInfo *)malloc(sizeof(storageInfo) * storageCount);
+
+	strcpy(storageInfoArr[0].stor_ip,NOTTHING);
+    strcpy(storageInfoArr[0].stor_filepath,NOTTHING);
+    strcpy(storageInfoArr[0].stor_id,NOTTHING);
+    strcpy(storageInfoArr[0].stor_kind,NOTTHING);
+    strcpy(storageInfoArr[0].stor_pubkey,NOTTHING);
 
 	if ((access_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
@@ -65,7 +70,7 @@ int main(int argc, char *argv[])
 			printf("%s\n",storageInfoArr[storageCount-1].stor_ip);
 			printf("%s\n",storageInfoArr[storageCount-1].stor_id);
 			printf("%s\n",storageInfoArr[storageCount-1].stor_pubkey);
-			printf("%s\n",storageInfoArr[storageCount-1].stor_ext);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_kind);
 
 			storageCount ++;
 			storageInfoArr = (storageInfo*)realloc(storageInfoArr,sizeof(storageInfo)*storageCount);

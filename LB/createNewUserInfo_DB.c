@@ -90,10 +90,10 @@ int createNewUserInfo_DB(char *newUser_id,char *newUser_password){
     printf("select UserFileList DB success.\n");
 
     sprintf(query,"CREATE TABLE IF NOT EXISTS %s(\
-                file_name VARCHAR(100),\
-                location VARCHAR(10),\
-                first_touch DATETIME,\
-                last_touch DATETIME\
+                file_name VARCHAR(100) PRIMARY KEY,\
+                location VARCHAR(10) NOT NULL,\
+                first_touch DATETIME NOT NULL,\
+                last_touch DATETIME NOT NULL\
                 )",newUser_id);
 
     if(mysql_query(conn,query)){
@@ -102,6 +102,7 @@ int createNewUserInfo_DB(char *newUser_id,char *newUser_password){
         return 0;
     }
     printf("create newUser table success\n");
-
+    
+    mysql_close(conn);
     return 1;
 }

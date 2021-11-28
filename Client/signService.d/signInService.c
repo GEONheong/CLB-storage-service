@@ -42,15 +42,19 @@ int main(int argc, char *argv[])
 
         recv(userInfoSock,buf, sizeof(buf), 0);
         
+        printf("--------------------------------------\n");
         if(strcmp(buf,_SIGNIN_SUCCESS) == 0){
             printf("%s\n",_SIGNIN_SUCCESS);
+            printf("--------------------------------------\n");
             sprintf(bufForSys,"./clientMoniter.d/clientMoniter %s",preUser.user_id);
             system(bufForSys);
         }
         else if(strcmp(buf,_SIGNIN_FAIL) == 0){
             printf("%s\n",_SIGNIN_FAIL);
-            system("sh ./myStorageService.sh");
+            printf("--------------------------------------\n");
+            system("sh ./Geon_StorageService.sh");
         }
+        
     }
 
     

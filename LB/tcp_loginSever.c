@@ -66,19 +66,18 @@ void* tcp_loginServer()
             }
             if(strcmp(buf,_SIGNUP_MSG) == 0){
                 recv(accept_sock, (userInfo*)&newUser, sizeof(newUser), 0);
-                int ret = createNewUserInfo_DB(newUser.user_id,newUser.user_password);
 
+                int ret = createNewUserInfo_DB(newUser.user_id,newUser.user_password);
                 if (ret){
                     send(accept_sock,_SIGNUP_SUCCESS,strlen(_SIGNUP_SUCCESS)+1,0);
                 }else{
                     send(accept_sock,_SIGNUP_FAIL,strlen(_SIGNUP_FAIL)+1,0);
                 }
-
             }
 		}
 	}
 
-    close(accept_sock);
+    close(access_sock);
     close(accept_sock);
 	return 0;
 }

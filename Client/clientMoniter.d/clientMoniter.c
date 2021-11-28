@@ -5,17 +5,20 @@ extern void savePubkey(char *pubkey);
 
 int inet_sock;
 struct sockaddr_in server_inet;
+mcast_group.sin_addr;
 char buf[BUFSIZ];
 
 char filepath[256];
 char filename[256];
 
 storageInfo currentStorageInfo;
+userInfo userMyInfo;
 
 const int SENDFILE = 1;
 const int GETFILE = 2;
 const int LOOKUPLIST = 3;
-const int SERVICEND = 4;
+const int REMOVEFILE = 4;
+const int SERVICEND = 5;
 
 int main(int argc, char *argv[])
 {
@@ -42,8 +45,15 @@ int main(int argc, char *argv[])
 		printf("[Info] Inet socket : connected to the LB\n");
 	}
 
-	printf ("Welcom, %s\n",argv[1]);
+	system("clear");
 	
+	printf("#########################################\n");
+	printf("Welcom, %s\n",argv[1]);
+	printf("#########################################\n");
+
+	strcpy(userMyInfo.user_id,argv[1]);
+	strcpy(userMyInfo.user_password,"secert");
+
 	while (1)
 	{
 		printf("%s", MENU);
@@ -51,6 +61,7 @@ int main(int argc, char *argv[])
 		if(scanf("%d", &menuNum)){
 			getchar();
 		}else{
+			system("clear");
 			printf("--------------------------------------\n");
 			printf("Try again...(Wrong Input or No option)\n");
 			printf("--------------------------------------\n");
@@ -73,12 +84,17 @@ int main(int argc, char *argv[])
 			filepath[strlen(filepath)-1]='\0';
 			strcpy(filename, getName(filepath));
 
+			//send my info
+			sendto(inet_sock, (userInfo*)&userMyInfo, sizeof(userMyInfo), 0,
+				   (struct sockaddr *)&server_inet, sizeof(server_inet));
+
 			//send to CLB filename
 			sendto(inet_sock, filename, strlen(filename) + 1, 0,
 				   (struct sockaddr *)&server_inet, sizeof(server_inet));
 
 			if (strcmp(filename, "NONE") == 0)
 			{
+				system("clear");
 				printf("--------------------------------------\n");
 				printf("Wrong Input...\n");
 				printf("Input FILENAME or FILEPATH...\n");
@@ -88,15 +104,20 @@ int main(int argc, char *argv[])
 
 			//recive from CLB storageInformation
 			recvfrom(inet_sock, (storageInfo *)&currentStorageInfo, sizeof(currentStorageInfo), 0, NULL, NULL);
-			// printf("%s\n",currentStorageInfo.stor_filepath);
-			// printf("%s\n",currentStorageInfo.stor_ip);
-			// printf("%s\n",currentStorageInfo.stor_id);
-			// printf("%s\n",currentStorageInfo.stor_pubkey);
+
+			if(strcmp(currentStorageInfo.stor_kind,NOTTHING) == 0){
+				system("clear");
+				printf("--------------------------------------\n");
+				printf("you can't upload file(not support extension)\n");
+				printf("--------------------------------------\n");
+				continue;
+			}
 
 			//modify "authorized_keys" file
 			savePubkey(currentStorageInfo.stor_pubkey);
 
 			//send file to storage(use scp)
+			system("clear");
 			printf("--------------------------------------\n");
 			sprintf(buf, "scp -p %s %s@%s:%s", filepath, currentStorageInfo.stor_id, currentStorageInfo.stor_ip, currentStorageInfo.stor_filepath);
 			int ret = system(buf);
@@ -130,12 +151,17 @@ int main(int argc, char *argv[])
 			filename[strlen(filename)-1]='\0';
 			strcpy(filename, getName(filename));
 
+			//send my info
+			sendto(inet_sock, (userInfo*)&userMyInfo, sizeof(userMyInfo), 0,
+				   (struct sockaddr *)&server_inet, sizeof(server_inet));
+
 			//send to CLB filename
 			sendto(inet_sock, filename, strlen(filename) + 1, 0,
 				   (struct sockaddr *)&server_inet, sizeof(server_inet));
 
 			if (strcmp(filename, "NONE") == 0)
 			{
+				system("clear");
 				printf("--------------------------------------\n");
 				printf("Wrong Input...\n");
 				printf("Input FILENAME or FILEPATH...\n");
@@ -146,10 +172,19 @@ int main(int argc, char *argv[])
 			//recive from CLB storageInformation
 			recvfrom(inet_sock, (storageInfo *)&currentStorageInfo, sizeof(currentStorageInfo), 0, NULL, NULL);
 
+			if(strcmp(currentStorageInfo.stor_kind,NOTTHING) == 0){
+				system("clear");
+				printf("--------------------------------------\n");
+				printf("you can't download file(not support extension)\n");
+				printf("--------------------------------------\n");
+				continue;
+			}
+
 			//modify "authorized_keys" file
 			savePubkey(currentStorageInfo.stor_pubkey);
 
 			//get file to storage(use scp)
+			system("clear");
 			printf("--------------------------------------\n");
 			strcat(currentStorageInfo.stor_filepath, filename);
 			sprintf(buf, "scp -p %s@%s:%s ./downloadFile", currentStorageInfo.stor_id, currentStorageInfo.stor_ip, currentStorageInfo.stor_filepath);
@@ -176,13 +211,37 @@ int main(int argc, char *argv[])
 				perror("send fail");
 				exit(1);
 			}
+
+			//send my info
+			sendto(inet_sock, (userInfo*)&userMyInfo, sizeof(userMyInfo), 0,
+				   (struct sockaddr *)&server_inet, sizeof(server_inet));
 			
-			recvfrom(inet_sock, buf, sizeof(buf), 0, NULL, NULL); // recv list
-			printf("%s\n", buf);
+			recvfrom(inet_sock,buf,sizeof(buf),0,NULL,NULL);
+
+			system("clear");
+			printf("################%s FileList#################\n",userMyInfo.user_id);
+			printf("%s\n",buf);
+			printf("Press ENTER quit:");
+			getchar();
+			system("clear");
+		}
+		else if(menuNum == REMOVEFILE){
+			if (sendto(inet_sock, _REMOVEFILE_MSG, strlen(_REMOVEFILE_MSG) + 1, 0, (struct sockaddr *)&server_inet, sizeof(server_inet)) == -1)
+			{
+				perror("send fail");
+				exit(1);
+			}
+
+			//send my info
+			sendto(inet_sock, (userInfo*)&userMyInfo, sizeof(userMyInfo), 0,
+				   (struct sockaddr *)&server_inet, sizeof(server_inet));
+		
 		}
 		else if (menuNum == SERVICEND)
 		{
+			printf("--------------------------------------\n");
 			printf("Service terminate...\n");
+			printf("--------------------------------------\n");
 			sleep(2);
 			break;
 		}

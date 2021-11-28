@@ -40,8 +40,10 @@ int main(int argc, char *argv[])
 
         recv(userInfoSock,buf, sizeof(buf), 0);
 
+        printf("--------------------------------------\n");
         printf("%s\n",buf);
-        system("sh ./myStorageService.sh");
+        printf("--------------------------------------\n");
+        system("sh ./Geon_StorageService.sh");
     }
 
     close(userInfoSock);

@@ -16,8 +16,9 @@ do
         read PASSWORD
         stty echo
 
-        ./signService.d/signInService $ID $PASSWORD
+        clear
 
+        ./signService.d/signInService $ID $PASSWORD
         break
     elif [ $menuNum -eq 2 ];then
         echo -n "Create ID : "
@@ -28,9 +29,12 @@ do
         read PASSWORD
         stty echo
 
+        clear
+
         ./signService.d/signUpService $ID $PASSWORD
         break
     else
+        clear
         echo "--------------------------------------\n"
 		echo "Try again...(Wrong Input or No option)\n"
 		echo "--------------------------------------\n"

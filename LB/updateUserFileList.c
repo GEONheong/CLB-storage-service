@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <mariadb/mysql.h>
 
-int checkPreUserInfo_DB(char *preUser_id,char *preUser_password){
-    printf("--------checkPreUserInfo_DB-----------\n");
+int updateUserFileList_DB(char *user_id,char* filename,char* location){
+    printf("--------updateUserFileList_DB-----------\n");
     MYSQL *conn;
     MYSQL_RES *res;
     MYSQL_ROW row;
@@ -11,8 +12,7 @@ int checkPreUserInfo_DB(char *preUser_id,char *preUser_password){
     char *server = "127.0.0.1";
     char *user = "root";
     char *password = "user";
-    char *database = "UserList";
-    char *database2 = "UserFileList";
+    char *database = "UserFileList";
 
     char query[256];
     int isPre;
@@ -41,27 +41,21 @@ int checkPreUserInfo_DB(char *preUser_id,char *preUser_password){
     }
     printf("select UserList DB success.\n");
 
-    sprintf(query,"select id,password from allUserList where id='%s' and password='%s'",preUser_id,preUser_password);
+    sprintf(query,"INSERT INTO %s (file_name,location,first_touch,last_touch)\
+                    VALUES ('%s','%s',now(),now())",user_id,filename,location);
 
     if(mysql_query(conn,query)){
-        mysql_close(conn);
-        printf("fail select id,password.\n");
-        return 0;
-    }
-    else{
-        res=mysql_store_result(conn); //result query
-        isPre = mysql_num_rows(res); //if result is 0 no Info in table, if result is 1 get Info in table
 
-        if(isPre){
-            printf("success select is,password\n");
-        }
-        else{
-            mysql_close(conn);
-            printf("fail select id,password.\n");
-            return 0;
-        }
+        sprintf(query,"UPDATE %s SET last_touch = now() WHERE file_name = '%s'",user_id,filename);
         
+        if(mysql_query(conn,query)){
+            mysql_close(conn);
+            printf("insert item fail.\n");
+            return 0;
+        }        
     }
+
+    printf("insert newUser in allUserList success\n");
 
     mysql_close(conn);
     return 1;

@@ -18,11 +18,12 @@
 #define _SENDFILE_MSG "_sendfile"
 #define _GETFILE_MSG "_getfile"
 #define _LOOKUPLIST_MSG "_lookuplist"
+#define _REMOVEFILE_MSG "_removefile"
 #define _SERVICEND_MSG "_servicend"
 #define _SIGNIN_MSG "_signin"
 #define _SIGNUP_MSG "_signup"
 
-#define MENU "<Geon's Storage Serivce>\n1.Upload File\n2.Download File\n3.Lookup Filelist\n4.Terminate Service\n"
+#define MENU "<Geon's Storage Serivce>\n1.Upload File\n2.Download File\n3.Lookup Filelist\n4.Remove File\n5.Terminate Service\n"
 
 #define _FILE_SUCCESS "Scuccess file transfer"
 #define _FILE_FAIL "Fail file transfer"
@@ -31,11 +32,13 @@
 #define _SIGNUP_SUCCESS "Success sign up"
 #define _SIGNUP_FAIL "Fail sign up"
 
+#define NOTTHING "notThing"
+
 typedef struct storage {
     char stor_ip[15];
     char stor_filepath[256];
     char stor_id[8];
-    char stor_ext[64];
+    char stor_kind[64];
     char stor_pubkey[1024];
 }storageInfo;
 

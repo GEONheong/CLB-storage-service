@@ -6,7 +6,8 @@
         "string.h": "c",
         "currentstorageinfo.h": "c",
         "type_traits": "c",
-        "storageinfo.h": "c"
+        "storageinfo.h": "c",
+        "EX.C": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

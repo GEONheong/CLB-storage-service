@@ -11,7 +11,7 @@ storageInfo storageMyInfo;
 
 int main(int argc, char *argv[])
 {
-	strcpy(storageMyInfo.stor_ext,"txt");
+	strcpy(storageMyInfo.stor_kind,"docs");
 	strcpy(storageMyInfo.stor_id,"pi");
 	strcpy(storageMyInfo.stor_filepath,"/home/pi/Desktop/Geon/Storage/fileStore/");
 	pubKey = getPubkey();
