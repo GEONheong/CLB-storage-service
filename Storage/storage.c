@@ -1,23 +1,31 @@
 #include "storageMyInfo.h"
 
-extern char* getPubkey(); //get ssh pubkey
+extern char *getPubkey(); //get ssh pubkey
+extern int createNewUserDir_recv();
 
-int sock,sendInfoSock;
-struct sockaddr_in server_inet;
-char buf[BUFSIZ];
-char* pubKey;
-
-storageInfo storageMyInfo;
-
-int main(int argc, char *argv[])
+//Send this storage machine infomation to CLB
+//when storage is boot 
+int main()
 {
-	strcpy(storageMyInfo.stor_kind,"docs");
-	strcpy(storageMyInfo.stor_id,"pi");
-	strcpy(storageMyInfo.stor_filepath,"/home/pi/Desktop/Geon/Storage/fileStore/");
-	pubKey = getPubkey();
-	strcpy(storageMyInfo.stor_pubkey,pubKey);
+	//socket var
+	int sendInfoSock;
+	struct sockaddr_in server_inet;
+	char buf[BUFSIZ];
+	char *pubKey;
 
-	if ((sendInfoSock = socket(AF_INET,SOCK_STREAM,0)) == -1){
+	//this storage machine infomation
+	storageInfo storageMyInfo;
+	
+	//this storage info
+	strcpy(storageMyInfo.stor_kind, "docs");
+	strcpy(storageMyInfo.stor_id, "pi");
+	strcpy(storageMyInfo.stor_filepath, "/home/pi/Desktop/Geon/Storage/fileStore/");
+	pubKey = getPubkey();
+	strcpy(storageMyInfo.stor_pubkey, pubKey);
+
+	//socket setting
+	if ((sendInfoSock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+	{
 		perror("sendInfoSock open error");
 		exit(1);
 	}
@@ -32,19 +40,15 @@ int main(int argc, char *argv[])
 		perror("socket connect error");
 		exit(1);
 	}
-	else
+	else //if find CLB
 	{
+		//send this storage machine infomation
 		printf("Send Storage information\n");
-		send(sendInfoSock, (storageInfo*)&storageMyInfo, sizeof(storageMyInfo), 0); // stroage info
+		send(sendInfoSock, (storageInfo *)&storageMyInfo, sizeof(storageMyInfo), 0); // stroage info
 		close(sendInfoSock);
 	}
 
-	if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
-	{
-		perror("soket open error");
-		exit(1);
-	}
-
-	close(sock);
+	//start recever func
+	createNewUserDir_recv();
 	return 0;
 }

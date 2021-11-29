@@ -1,6 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 
+
+//get ssh public key in this machine(storage)
+//from "/home/pi/.ssh/id_rsa.pub" and return public key to string
 char* getPubkey(){
     FILE *file =NULL;
     static char buf[1024];
@@ -14,10 +17,3 @@ char* getPubkey(){
     fclose(file);
     return buf;
 }
-
-// int main(){
-//     char* buf = getPubkey();
-
-//     printf("%s",buf);
-//     return 0;
-// }

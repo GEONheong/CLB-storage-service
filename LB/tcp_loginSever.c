@@ -5,9 +5,13 @@
 
 extern int createNewUserInfo_DB(char* newUser_id,char* newUser_password);
 extern int checkPreUserInfo_DB(char* preUser_id,char* preUser_password);
+extern int createNewUserDir_send(char* newUser_id);
 
+//perUser use in sign in
+//newUser use in sign up
 userInfo preUser,newUser;
 
+//login server SIGN IN or SIGN UP work
 void* tcp_loginServer()
 {
     pthread_detach(pthread_self());
@@ -18,6 +22,7 @@ void* tcp_loginServer()
     int client_addr_len = sizeof(client_addr);
     char buf[BUFSIZ];
 
+	//setting sock
 	if ((access_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
 		perror("socket open error");
@@ -43,19 +48,22 @@ void* tcp_loginServer()
 	
 	while (TRUE)
 	{
-
 		if ((accept_sock = accept(access_sock, (struct sockaddr *)&client_addr, &client_addr_len)) == -1)
 		{
 			perror("accept error");
 			exit(1);
 		}
-		else
+		else  //if approach signInService or signUpService
 		{
+			//recv from signInService or signUpService
 			recv(accept_sock, buf, sizeof(buf), 0);
 
+			//if recv from signInService
             if(strcmp(buf,_SIGNIN_MSG) == 0){
+				//recv userInfo
                 recv(accept_sock, (userInfo*)&preUser, sizeof(preUser), 0);
 
+				//checking userInfo in db (if in ret = 0 if not exists ret = 1)
                 int ret = checkPreUserInfo_DB(preUser.user_id,preUser.user_password);
                 if(ret){
                     send(accept_sock,_SIGNIN_SUCCESS,strlen(_SIGNIN_SUCCESS)+1,0);
@@ -64,12 +72,17 @@ void* tcp_loginServer()
                     send(accept_sock,_SIGNIN_FAIL,strlen(_SIGNIN_FAIL)+1,0);
                 }
             }
+
+			//if recv from signUpService
             if(strcmp(buf,_SIGNUP_MSG) == 0){
                 recv(accept_sock, (userInfo*)&newUser, sizeof(newUser), 0);
 
+				//checking userInfo in db 
+				//and create newUser info in db
                 int ret = createNewUserInfo_DB(newUser.user_id,newUser.user_password);
                 if (ret){
                     send(accept_sock,_SIGNUP_SUCCESS,strlen(_SIGNUP_SUCCESS)+1,0);
+					createNewUserDir_send(newUser.user_id);
                 }else{
                     send(accept_sock,_SIGNUP_FAIL,strlen(_SIGNUP_FAIL)+1,0);
                 }

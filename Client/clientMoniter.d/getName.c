@@ -2,23 +2,28 @@
 #include<stdlib.h>
 #include<string.h>
 
-char* getName(char *filepath){
-	static char buf[256]="";
-	char* name = NULL;
+char* getName(char *filepath){  //parse filename in filepath
+	static char filename[256]=""; //return filename
+	char* nameTemp = NULL;		  //temp
 
-	if(strstr(filepath,"/") != NULL){
-		name = strrchr(filepath,'/');
-		strcpy(buf,name+1);
+	//have path (in other directory) ex) /home/geon/test.txt, ../geon/test.txt
+	if(strstr(filepath,"/") != NULL)
+	{
+		nameTemp = strrchr(filepath,'/'); 
+		strcpy(filename,nameTemp+1);
 	}
-	else{
-		name = strrchr(filepath,'.');
-		if(name == NULL){
-			strcpy(buf,"NONE");
+
+	//don't have path(in same directory) ex) test.txt
+	else
+	{
+		nameTemp = strrchr(filepath,'.');
+		if(nameTemp == NULL){           //input wrong ex) test
+			strcpy(filename,"NONE");
 		}
-		else{
-			strcpy(buf,filepath);
+		else{                          //input right ex) test.txt
+			strcpy(filename,filepath);
 		}	
 	}
 
-	return buf;
+	return filename; //result filename;
 }
