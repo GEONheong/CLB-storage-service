@@ -1,7 +1,7 @@
 #include "storageMyInfo.h"
 
 extern char *getPubkey(); //get ssh pubkey
-extern int createNewUserDir_recv();
+extern int udpMulticast_recv();
 
 //Send this storage machine infomation to CLB
 //when storage is boot 
@@ -49,6 +49,6 @@ int main()
 	}
 
 	//start recever func
-	createNewUserDir_recv();
+	udpMulticast_recv();
 	return 0;
 }

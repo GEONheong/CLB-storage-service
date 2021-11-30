@@ -4,6 +4,8 @@ extern char *getExt(char *filename);
 extern char *compareExt_getStorKind_DB(char *ext);
 extern int updateUserFileList_DB(char *user_id, char *filename, char *location);
 extern char *getUserFileList_DB(char *user_id);
+extern int udpMulticast_send(char *message);
+extern int deleteItemInFileList_DB(char *user_id,char *filename);
 
 //CLBmain var extern 
 extern storageInfo *storageInfoArr;
@@ -123,6 +125,25 @@ void *udp_server()
             //send filelist to user
             sendto(sock, buf, strlen(buf) + 1, 0,
                    (struct sockaddr *)&client_in, sizeof(client_in));
+        }
+        else if(strcmp(buf,_REMOVEFILE_MSG) == 0)
+        {
+            //recv filename from client
+            recvfrom(sock, buf, sizeof(buf), 0,
+                     (struct sockaddr *)&client_in, &clientlen);
+            strcpy(recv_filename, buf);
+
+            //make payload for remove file
+            strcpy(buf,"rmFile|");
+            strcat(buf,req_userInfo.user_id);
+            strcat(buf,"|");
+            strcat(buf,recv_filename);
+
+            //send message(payload) to storage
+            udpMulticast_send(buf);
+
+            //and delete filename item in db
+            deleteItemInFileList_DB(req_userInfo.user_id,recv_filename);
         }
         else
         {

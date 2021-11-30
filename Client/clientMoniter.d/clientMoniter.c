@@ -254,10 +254,31 @@ int main(int argc, char *argv[])
 				exit(1);
 			}
 
+			//input filename
+			printf("Input File Name: ");
+			fgets(filename,sizeof(filename),stdin);
+			filename[strlen(filename)-1]='\0';
+			strcpy(filename, getName(filename));
+
 			//send my info
 			sendto(inet_sock, (userInfo*)&userMyInfo, sizeof(userMyInfo), 0,
 				   (struct sockaddr *)&server_inet, sizeof(server_inet));
-		
+
+			//send to CLB filename
+			sendto(inet_sock, filename, strlen(filename) + 1, 0,
+				   (struct sockaddr *)&server_inet, sizeof(server_inet));
+				   
+			if (strcmp(filename, "NONE") == 0)
+			{
+				system("clear");
+				printf("--------------------------------------\n");
+				printf("Wrong Input...\n");
+				printf("Input FILENAME or FILEPATH...\n");
+				printf("--------------------------------------\n");
+				continue;
+			}
+			
+			system("clear");
 		}
 		else if (menuNum == SERVICEND) //select service end
 		{

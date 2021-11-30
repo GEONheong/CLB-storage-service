@@ -5,7 +5,7 @@
 
 extern int createNewUserInfo_DB(char* newUser_id,char* newUser_password);
 extern int checkPreUserInfo_DB(char* preUser_id,char* preUser_password);
-extern int createNewUserDir_send(char* newUser_id);
+extern int udpMulticast_send(char* messaage);
 
 //perUser use in sign in
 //newUser use in sign up
@@ -82,7 +82,13 @@ void* tcp_loginServer()
                 int ret = createNewUserInfo_DB(newUser.user_id,newUser.user_password);
                 if (ret){
                     send(accept_sock,_SIGNUP_SUCCESS,strlen(_SIGNUP_SUCCESS)+1,0);
-					createNewUserDir_send(newUser.user_id);
+
+					//make message(payload)
+					strcpy(buf,"createDir|");
+					strcat(buf,newUser.user_id);
+
+					//send message all storage
+					udpMulticast_send(buf);
                 }else{
                     send(accept_sock,_SIGNUP_FAIL,strlen(_SIGNUP_FAIL)+1,0);
                 }

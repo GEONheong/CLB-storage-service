@@ -8,8 +8,9 @@
 #include <sys/socket.h>
 
 //multicasting to all storage
-//send message to all storage create newUser only directory
-int createNewUserDir_send(char *newUser_id)
+//1.send message to all storage create newUser only directory
+//2.send message to all storage remove file
+int udpMulticast_send(char *message)
 {
     //sock var
     int sendSock;
@@ -34,9 +35,9 @@ int createNewUserDir_send(char *newUser_id)
     }
 
     //send user id to storage
-    sendto(sendSock, newUser_id, strlen(newUser_id) + 1, 0, (struct sockaddr *)&mcast_group, sizeof(mcast_group));
+    sendto(sendSock, message, strlen(message) + 1, 0, (struct sockaddr *)&mcast_group, sizeof(mcast_group));
 
-    printf("Send to storages : %s\n", newUser_id);
+    printf("Send to storages : %s\n", message);
     close(sendSock);
 
     return 0;

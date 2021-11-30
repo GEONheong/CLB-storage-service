@@ -7,10 +7,12 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+extern int parseMsg_work(char *message);
 //recver muticasting_send(in LB dir)
-//recv new user id
+//recv message (payload)
 //create new user private directory
-int createNewUserDir_recv(){
+//remove file for user request
+int udpMulticast_recv(){
     //socket var
     int read_sock;
     int flag;
@@ -22,9 +24,9 @@ int createNewUserDir_recv(){
     struct ip_mreq mreq;
 
     //new user id var
-    char newUser_id[256];
+    char message[256];
 
-    //use in system() commad buf
+    //use in system() commad message
     char cmd[256];
 
     //socket setting
@@ -63,16 +65,15 @@ int createNewUserDir_recv(){
     
     while(1){
         
-        memset(newUser_id,0x00,256);
-        memset(cmd,0x00,256);
+        memset(&message,0x00,256);
+        memset(&cmd,0x00,256);
 
-        //recv user id
-        recvfrom(read_sock,newUser_id,256,0,(struct sockaddr*)&from,&addrlen);
-        printf("[NEW USER]%s\n",newUser_id);
+        //recv message
+        recvfrom(read_sock,message,256,0,(struct sockaddr*)&from,&addrlen);
+        printf("[MSG]%s\n",message);
 
-        //mkdir user id directory
-        sprintf(cmd,"mkdir ./fileStore/%s",newUser_id);
-        system(cmd);       
+        //parse mesage function
+        parseMsg_work(message);
     }
 
     close(read_sock);
