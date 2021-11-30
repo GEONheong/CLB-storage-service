@@ -21,6 +21,9 @@
     - C Lang
     - Shell Script
     - scp (Secure Copy)
-    - RsBerry PI
+    - Docker
+    - MariaDB & API
+    - RasBerry Pi
 
 3. **서비스 구조**
+![image]Service_structure
