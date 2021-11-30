@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <mariadb/mysql.h>
-
+#include "main.h"
 
 //this is SIGN IN function
 //check present User in database

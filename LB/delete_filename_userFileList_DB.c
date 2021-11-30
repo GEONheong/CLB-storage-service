@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <mariadb/mysql.h>
+#include "main.h"
+
 
 //this is REMOVE FILE function
 int deleteItemInFileList_DB(char *user_id,char *filename){

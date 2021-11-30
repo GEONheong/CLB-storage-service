@@ -1,24 +1,24 @@
-#include "storageInfo.h"
-
-extern char *getExt(char *filename);
-extern char *compareExt_getStorKind_DB(char *ext);
-extern int updateUserFileList_DB(char *user_id, char *filename, char *location);
-extern char *getUserFileList_DB(char *user_id);
-extern int udpMulticast_send(char *message);
-extern int deleteItemInFileList_DB(char *user_id,char *filename);
+#include "main.h"
 
 //CLBmain var extern 
 extern storageInfo *storageInfoArr;
 extern int storageCount;
 
-//current user request var
-userInfo req_userInfo;
+char *getExt(char *filename);
+char *compareExt_getStorKind_DB(char *ext);
+int updateUserFileList_DB(char *user_id, char *filename, char *location);
+char *getUserFileList_DB(char *user_id);
+int udpMulticast_send(char *message);
+int deleteItemInFileList_DB(char *user_id,char *filename);
 
 void *udp_server()
 {
     pthread_detach(pthread_self());
 
     printf("[BEFORE storageInfoArr, addr, in udp_server] %x\n", storageInfoArr);
+
+    //current user request var
+    userInfo req_userInfo;
 
     //file ext , filename var
     char *ext = NULL;
@@ -39,7 +39,7 @@ void *udp_server()
 
     memset((char *)&server_in, '\0', sizeof(server_in));
     server_in.sin_family = AF_INET;
-    server_in.sin_addr.s_addr = inet_addr("127.0.0.1");
+    server_in.sin_addr.s_addr = inet_addr(LB_IP);
     server_in.sin_port = htons(9005);
 
     if (bind(sock, (struct sockaddr *)&server_in, sizeof(server_in)))
@@ -78,6 +78,7 @@ void *udp_server()
 
             //send storag information to client(storage for that file type)
             char *location = compareExt_getStorKind_DB(ext);
+            printf("b1\n");
             if (strcmp(location, "fail") == 0) //if get location fail, send index0 sotrage information(all information is NOTTHING)
             {
                 sendto(sock, (storageInfo *)&storageInfoArr[0], sizeof(storageInfoArr[0]), 0,
@@ -94,7 +95,9 @@ void *udp_server()
                                (struct sockaddr *)&client_in, sizeof(client_in));
                     }
                 }
+                printf("b3\n");
             }
+            printf("b2\n");
 
             //recv from client success message
             recvfrom(sock, buf, sizeof(buf), 0,

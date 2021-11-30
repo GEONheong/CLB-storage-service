@@ -13,7 +13,7 @@
 #include <sys/select.h>
 #include <sys/un.h>
 
-#define LB_IP "127.0.0.1"
+#define LB_IP "192.168.0.187"
 
 #define _SENDFILE_MSG "_sendfile"
 #define _GETFILE_MSG "_getfile"

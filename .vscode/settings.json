@@ -7,7 +7,10 @@
         "currentstorageinfo.h": "c",
         "type_traits": "c",
         "storageinfo.h": "c",
-        "EX.C": "cpp"
+        "EX.C": "cpp",
+        "main.h": "c",
+        "stdlib.h": "c",
+        "un.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

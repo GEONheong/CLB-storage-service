@@ -1,29 +1,28 @@
-#include "storageInfo.h"
+#include "main.h"
 
 #define TRUE 1
 #define FALSE 0
 
-//thread func
-extern void* udp_server();
-extern void* tcp_loginServer();
-
-//tcp socket var
-int access_sock, accept_sock;
-struct sockaddr_in server_addr, client_addr;
-int client_addr_len = sizeof(client_addr);
-char buf[BUFSIZ];
-
 //storage info count
 int storageCount = 2;
 
-//will save in here storage info
+// //will save in here storage info
 storageInfo *storageInfoArr = NULL;
 
-//thread var
-pthread_t udpServerThr,tcploginThr;
+void* udp_server();
+void* tcp_loginServer();
 
 int main(int argc, char *argv[])
 {
+	//tcp socket var
+	int access_sock, accept_sock;
+	struct sockaddr_in server_addr, client_addr;
+	int client_addr_len = sizeof(client_addr);
+	char buf[BUFSIZ];
+
+	//thread var
+	pthread_t udpServerThr,tcploginThr;
+
 	//allocation memory in storageInfoArray
 	storageInfoArr = (storageInfo *)malloc(sizeof(storageInfo) * storageCount);
 
@@ -43,7 +42,7 @@ int main(int argc, char *argv[])
 
 	memset((char *)&server_addr, '\0', sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	server_addr.sin_addr.s_addr = inet_addr(LB_IP);
 	server_addr.sin_port = htons(9999);
 
 	if (bind(access_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)

@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <mariadb/mysql.h>
-
+#include "main.h"
 
 //this is uploadFile or downloadFile function
 //update user filelist

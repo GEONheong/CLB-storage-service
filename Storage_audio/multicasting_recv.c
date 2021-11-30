@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include "storageMyInfo.h"
 
 extern int parseMsg_work(char *message);
 //recver muticasting_send(in LB dir)

@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <mariadb/mysql.h>
-#include<string.h>
+#include "main.h"
 
 
 //return user filelist

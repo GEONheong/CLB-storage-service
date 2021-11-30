@@ -1,20 +1,20 @@
-#include "storageInfo.h"
+#include "main.h"
 
 #define TRUE 1
 #define FALSE 0
 
-extern int createNewUserInfo_DB(char* newUser_id,char* newUser_password);
-extern int checkPreUserInfo_DB(char* preUser_id,char* preUser_password);
-extern int udpMulticast_send(char* messaage);
-
-//perUser use in sign in
-//newUser use in sign up
-userInfo preUser,newUser;
+int createNewUserInfo_DB(char* newUser_id,char* newUser_password);
+int checkPreUserInfo_DB(char* preUser_id,char* preUser_password);
+int udpMulticast_send(char* messaage);
 
 //login server SIGN IN or SIGN UP work
 void* tcp_loginServer()
 {
     pthread_detach(pthread_self());
+
+	//perUser use in sign in
+	//newUser use in sign up
+	userInfo preUser,newUser;
     
     //tcp socket var
     int access_sock, accept_sock;
@@ -31,7 +31,7 @@ void* tcp_loginServer()
 
 	memset((char *)&server_addr, '\0', sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+	server_addr.sin_addr.s_addr = inet_addr(LB_IP);
 	server_addr.sin_port = htons(9998);
 
 	if (bind(access_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1)

@@ -1,7 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<mariadb/mysql.h>
+#include "main.h"
 
 //get ext function
 //ex) filename = test.txt -> return txt
@@ -90,6 +87,6 @@ char *compareExt_getStorKind_DB(char *ext){
 
     mysql_free_result(res);
     mysql_close(conn);
-
+    
     return storKind;
 }

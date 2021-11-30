@@ -1,14 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include "storageMyInfo.h"
 
 int parseMsg_work(char* message){  //parsing message
     //temp pointer;
     char* msgTemp = NULL;
     //parsed item var		  
-    char parse_buf[3][10] ={"NONE","NONE","NONE"};
+    char parse_buf[3][256] ={"NONE","NONE","NONE"};
     //command line buf
-    char cmd[50];
+    char cmd[1024];
     //index
     int i=0;
 

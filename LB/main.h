@@ -10,10 +10,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <sys/select.h>
 #include <sys/un.h>
+#include <mariadb/mysql.h>
 
-#define LB_IP "127.0.0.1"
+#define LB_IP "192.168.0.187"
 
 #define _SENDFILE_MSG "_sendfile"
 #define _GETFILE_MSG "_getfile"
@@ -33,6 +33,19 @@
 #define _LIST_UPDATE_FAIL "Fail list update"
 
 #define NOTTHING "notThing"
+
+char *getExt(char *filename);
+char *compareExt_getStorKind_DB(char *ext);
+int updateUserFileList_DB(char *user_id, char *filename, char *location);
+char *getUserFileList_DB(char *user_id);
+int udpMulticast_send(char *message);
+int deleteItemInFileList_DB(char *user_id,char *filename);
+int createNewUserInfo_DB(char* newUser_id,char* newUser_password);
+int checkPreUserInfo_DB(char* preUser_id,char* preUser_password);
+
+//thread func 
+void* udp_server();
+void* tcp_loginServer();
 
 typedef struct storage {
     char stor_ip[15];
