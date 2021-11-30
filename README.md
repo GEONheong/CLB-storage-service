@@ -1,1 +1,1 @@
-# CLB-storage-service
+# CLB(Content LoadBalance)+StorageService
