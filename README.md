@@ -26,5 +26,5 @@
     - RasBerry Pi
 
 3. **서비스 구조**
-![Image](./ServiceStructure.JPG)
+![Image](./Service_structure.JPG)
 
