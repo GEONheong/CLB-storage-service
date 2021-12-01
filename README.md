@@ -25,8 +25,8 @@
 - MariaDB & API
 - RasBerry Pi
 
-**3. 서비스 구조**
-![Image](./readmeImg/Service_structure.JPG)
+**3. 서비스 구조** 
+![Image](./_readmeImg/Service_structure.JPG)
 
 # 2. Project Diagram
 
@@ -35,7 +35,7 @@
 
 **1. 초기 CLB 부팅**
 - 시스템을 구성하기위해 처음 CLB 부팅 시 동작입니다.
-- ![Image](./readmeImg/clbBoot.JPG)
+![Image](./_readmeImg/clbBoot.JPG)
 
 **2. Storage 부팅(새로운 장비)**
 - 스토리지 장비로 사용될 장비가 부팅 시 동작입니다.
