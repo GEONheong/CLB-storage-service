@@ -46,7 +46,7 @@
 ---
 
 ## _2-2. Service Diagram_
->__ 서비스 마다 동작 요청/응답 메세지와 동작 시퀀스에 대한 다이어그램입니다.__
+>__서비스 마다 동작 요청/응답 메세지와 동작 시퀀스에 대한 다이어그램입니다.__
 
 **1. 로그인(Sign In)**
 - 이미 서비스에 가입된 사용자에 대한 로그인 동작입니다.
@@ -62,15 +62,12 @@
 
 **4. 파일 다운로드(File Download)**
 - 사용자가 스토리지로 부터 파일 다운로드 요청 시 동작입니다.
-- 
+![Image](./_readmeImg/downloadfile.JPG)
 
 **5. 파일 삭제(File Remove)**
 - 스토리지에 업로드(저장)된 파일을 삭제 요청 시 동작입니다.
-- 
+![Image](./_readmeImg/removefile.JPG)
 
 **6. 파일리스트 조회(Lookup File list)**
 - 사용자가 업로드한 파일의 리스트 요청 시 동작입니다.
-- 
-
-
-
+![Image](./_readmeImg/filelist.JPG)
