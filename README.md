@@ -26,7 +26,7 @@
 - RasBerry Pi
 
 **3. 서비스 구조** 
->CLB 와 Storage는 같은 네트워크를 사용하고 Client는 외부의 네트워크에서 접속 한다고 가정합니다.
+>__CLB 와 Storage는 같은 네트워크를 사용하고 Client는 외부의 네트워크에서 접속 한다고 가정합니다.__
 
 ![Image](./_readmeImg/Service_structure.JPG)
 
@@ -36,12 +36,24 @@
 >__초기 시스템 구성/새로운 장비 설치시 대한 다이어그램입니다__
 
 **1. 초기 CLB 부팅**
-- 시스템을 구성하기위해 처음 CLB 부팅 시 동작입니다.
-![Image](./_readmeImg/clbBoot.JPG)
+
+<details>
+<summary>시스템을 구성하기위해 처음 CLB 부팅 시 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/clbBoot.JPG)
+
+</div>
+</details>
 
 **2. Storage 부팅(새로운 장비)**
-- 스토리지 장비로 사용될 장비가 부팅 시 동작입니다.
-![Image](./_readmeImg/storInfo.JPG)
+<details>
+<summary>스토리지 장비로 사용될 장비가 부팅 시 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/storInfo.JPG)
+</div>
+</details>
 
 ---
 
@@ -49,25 +61,60 @@
 >__서비스 마다 동작 요청/응답 메세지와 동작 시퀀스에 대한 다이어그램입니다.__
 
 **1. 로그인(Sign In)**
-- 이미 서비스에 가입된 사용자에 대한 로그인 동작입니다.
-![Image](./_readmeImg/login.JPG)
+
+<details>
+<summary>이미 서비스에 가입된 사용자에 대한 로그인 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/login.JPG)
+</div>
+</details>
 
 **2. 계정 만들기(Sign Up)**
-- 서비스에 새로 가입하는 사용자에 대한 동작입니다.
-![Image](./_readmeImg/signup.JPG)
+
+<details>
+<summary>서비스에 새로 가입하는 사용자에 대한 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/signup.JPG)
+</div>
+</details>
 
 **3. 파일 업로드(File Upload)**
-- 사용자가 스토리지로 파일 업로드 요청 시 동작입니다.
-![Image](./_readmeImg/uploadfile.JPG)
+<details>
+<summary>사용자가 스토리지로 파일 업로드 요청 시 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/uploadfile.JPG)
+</div>
+</details>
 
 **4. 파일 다운로드(File Download)**
-- 사용자가 스토리지로 부터 파일 다운로드 요청 시 동작입니다.
-![Image](./_readmeImg/downloadfile.JPG)
+<details>
+<summary>사용자가 스토리지로 부터 파일 다운로드 요청 시 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/downloadfile.JPG)
+</div>
+</details>
 
 **5. 파일 삭제(File Remove)**
-- 스토리지에 업로드(저장)된 파일을 삭제 요청 시 동작입니다.
-![Image](./_readmeImg/removefile.JPG)
+<details>
+<summary>스토리지에 업로드(저장)된 파일을 삭제 요청 시 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/removefile.JPG)
+</div>
+</details>
 
 **6. 파일리스트 조회(Lookup File list)**
-- 사용자가 업로드한 파일의 리스트 요청 시 동작입니다.
-![Image](./_readmeImg/filelist.JPG)
+<details>
+<summary>사용자가 업로드한 파일의 리스트 요청 시 동작입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/filelist.JPG)
+</div>
+</details>
+
+# 3. Project Running Screen
+>__프로젝트 구동 화면 입니다__
