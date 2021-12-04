@@ -1,5 +1,5 @@
 
-#define LB_IP "192.168.0.187"
+#define LB_IP "192.168.0.20"
 
 char *getPubkey();
 int udpMulticast_recv();
