@@ -135,6 +135,7 @@ int main(int argc, char *argv[])
 			strcat(dest_filepath,buf); // dest_filename = "currentStorageInfo.stor_ip + userMyInfo.user_id/" 
 			//use scp if success return 0 
 			//if fail return useByte
+			//sprintf(buf, "sshpass -p %s scp -o StrictHostKeyChecking=no -p %s %s@%s:%s",currentStorageInfo.stor_pwd, filepath, currentStorageInfo.stor_id, currentStorageInfo.stor_ip, dest_filepath);
 			sprintf(buf, "scp -p %s %s@%s:%s", filepath, currentStorageInfo.stor_id, currentStorageInfo.stor_ip, dest_filepath);
 			int ret = system(buf);
 			memset(&dest_filepath,'\0',sizeof(dest_filepath));
@@ -205,6 +206,7 @@ int main(int argc, char *argv[])
 			strcpy(dest_filepath,currentStorageInfo.stor_filepath);
 			sprintf(buf,"%s/%s",userMyInfo.user_id,filename);
 			strcat(dest_filepath,buf);
+			//sprintf(buf, "sshpass -p %s scp -o StrictHostKeyChecking=no -p %s@%s:%s ./downloadFile",currentStorageInfo.stor_pwd, currentStorageInfo.stor_id, currentStorageInfo.stor_ip, dest_filepath);
 			sprintf(buf, "scp -p %s@%s:%s ./downloadFile", currentStorageInfo.stor_id, currentStorageInfo.stor_ip, dest_filepath);
 			int ret = system(buf);
 			memset(&dest_filepath,'\0',sizeof(dest_filepath));

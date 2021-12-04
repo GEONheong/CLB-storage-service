@@ -44,6 +44,7 @@ int main()
 	strcpy(storageMyInfo.stor_filepath, cwd);
 	pubKey = getPubkey();
 	strcpy(storageMyInfo.stor_pubkey, pubKey);
+	//strcpy(storageMyInfo.stor_pwd, "raspberry");
 
 	//socket setting
 	if ((sendInfoSock = socket(AF_INET, SOCK_STREAM, 0)) == -1)

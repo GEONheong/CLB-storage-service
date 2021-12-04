@@ -12,5 +12,6 @@ typedef struct storage {
     char stor_id[8];
     char stor_kind[64];
     char stor_pubkey[1024];
+    //char stor_pwd[20];
 }storageInfo;
 
