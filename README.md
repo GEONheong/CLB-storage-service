@@ -118,3 +118,113 @@
 
 # 3. Project Running Screen
 >__프로젝트 구동 화면 입니다__
+ - 화면 구성
+![Image](./_readmeImg/0_FIRST.JPG)
+
+---
+
+## _2-1. Configure System screen_
+
+**1. CLB부팅**
+<details>
+<summary>CLB 부팅 직후 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/1_startCLB.JPG)
+</div>
+</details>
+
+**2. Storage 부팅**
+<details>
+<summary>종류별 Storage 부팅 직후 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/2_connectStorages.JPG)
+</div>
+</details>
+
+---
+
+## _2-2. Service screen_
+
+**1. Client 실행**
+<details>
+<summary>사용자 프로그램 시작 직후 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/3_startClient.JPG)
+</div>
+</details>
+
+**2. 계정 만들기(Sign Up)**
+<details>
+<summary>서비스 가입시 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/4-1_signUp.JPG)
+>![Image](./_readmeImg/4-2_signUp.JPG)
+</div>
+</details>
+
+**3. 로그인(Sign In)**
+<details>
+<summary>로그인시 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/5-1_signIN.JPG)
+>![Image](./_readmeImg/5-2_signIN.JPG)
+</div>
+</details>
+
+**4. 파일 업로드(File Upload)**
+<details>
+<summary>파일 업로드시 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/6-1_fileSend.JPG)
+>![Image](./_readmeImg/6-2_fileSend.JPG)
+
+업로드 이후 파일리스트 화면입니다.
+>![Image](./_readmeImg/7-1_lookuplist.JPG)
+</div>
+</details>
+
+**5. 파일 다운로드(File Download)**
+<details>
+<summary>파일 다운로드시 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/8-1_downLoad.JPG)
+
+downloadFile 디렉토리에 파일이 다운로드 되었습니다.
+>![Image](./_readmeImg/8-2_downLoad.JPG)
+</div>
+</details>
+
+**6. 파일 삭제(File Remove)**
+<details>
+<summary>파일 삭제시 화면입니다.</summary>
+<div>
+
+먼저 파일하나를 더 업로드 합니다.
+>![Image](./_readmeImg/9_example.JPG)
+>![Image](./_readmeImg/9-1_example.JPG)
+
+삭제를 요청 합니다.
+>![Image](./_readmeImg/10-1_remove.JPG)
+>![Image](./_readmeImg/10-2_remove.JPG)
+</div>
+</details>
+
+**7. 서비스 종료**
+<details>
+<summary>서비스 종료시 화면입니다.</summary>
+<div>
+
+>![Image](./_readmeImg/11_end.JPG)
+
+_추가_
+여러 유저가 접속 하여 사용이 가능합니다.
+>![Image](./_readmeImg/12_multiuser.JPG)
+</div>
+</details>
