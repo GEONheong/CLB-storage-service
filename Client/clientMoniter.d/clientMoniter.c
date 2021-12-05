@@ -139,19 +139,22 @@ int main(int argc, char *argv[])
 			//sprintf(buf, "scp -p %s %s@%s:%s", filepath, currentStorageInfo.stor_id, currentStorageInfo.stor_ip, dest_filepath);
 			int ret = system(buf);
 			memset(&dest_filepath,'\0',sizeof(dest_filepath));
-			printf("--------------------------------------\n");
+			
 
 			//send to CLB "file send success or fail" message
 			if (ret == 0)
 			{
 				sendto(inet_sock, _FILE_SUCCESS, strlen(_FILE_SUCCESS) + 1, 0,
 					   (struct sockaddr *)&server_inet, sizeof(server_inet));
+				printf("%s\n",_FILE_SUCCESS);
 			}
 			else
 			{
 				sendto(inet_sock, _FILE_FAIL, strlen(_FILE_FAIL) + 1, 0,
 					   (struct sockaddr *)&server_inet, sizeof(server_inet));
+				printf("%s\n",_FILE_FAIL);
 			}
+			printf("--------------------------------------\n");
 		}
 		else if (menuNum == GETFILE) //select getfile
 		{ 
@@ -210,19 +213,22 @@ int main(int argc, char *argv[])
 			//sprintf(buf, "scp -p %s@%s:%s ./downloadFile", currentStorageInfo.stor_id, currentStorageInfo.stor_ip, dest_filepath);
 			int ret = system(buf);
 			memset(&dest_filepath,'\0',sizeof(dest_filepath));
-			printf("--------------------------------------\n");
+			
 
 			//send to CLB "file send success" message
 			if (ret == 0)
 			{
 				sendto(inet_sock, _FILE_SUCCESS, strlen(_FILE_SUCCESS) + 1, 0,
 					   (struct sockaddr *)&server_inet, sizeof(server_inet));
+				printf("%s\n",_FILE_SUCCESS);
 			}
 			else
 			{
 				sendto(inet_sock, _FILE_FAIL, strlen(_FILE_FAIL) + 1, 0,
 					   (struct sockaddr *)&server_inet, sizeof(server_inet));
+				printf("%s\n",_FILE_FAIL);
 			}
+			printf("--------------------------------------\n");
 		}
 		else if (menuNum == LOOKUPLIST) //select lookup filelist
 		{

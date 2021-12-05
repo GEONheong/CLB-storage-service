@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     strcpy(storageInfoArr[0].stor_id,NOTTHING);
     strcpy(storageInfoArr[0].stor_kind,NOTTHING);
     strcpy(storageInfoArr[0].stor_pubkey,NOTTHING);
-	//strcpy(storageInfoArr[0].stor_pwd,NOTTHING);
+	strcpy(storageInfoArr[0].stor_pwd,NOTTHING);
 
 	//socket setting
 	if ((access_sock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
@@ -76,12 +76,13 @@ int main(int argc, char *argv[])
 			
 			//print storage info
 			strcpy(storageInfoArr[storageCount-1].stor_ip, inet_ntoa(client_addr.sin_addr));
-			printf("%s\n",storageInfoArr[storageCount-1].stor_filepath);
-			printf("%s\n",storageInfoArr[storageCount-1].stor_ip);
-			printf("%s\n",storageInfoArr[storageCount-1].stor_id);
-			printf("%s\n",storageInfoArr[storageCount-1].stor_pubkey);
-			printf("%s\n",storageInfoArr[storageCount-1].stor_kind);
-			printf("%s\n",storageInfoArr[storageCount-1].stor_pwd);
+			printf("[NEW Storage] : %s (%s)\n",storageInfoArr[storageCount-1].stor_ip,storageInfoArr[storageCount-1].stor_kind);	
+			// printf("%s\n",storageInfoArr[storageCount-1].stor_filepath);
+			// printf("%s\n",storageInfoArr[storageCount-1].stor_ip);
+			// printf("%s\n",storageInfoArr[storageCount-1].stor_id);
+			// printf("%s\n",storageInfoArr[storageCount-1].stor_pubkey);
+			// printf("%s\n",storageInfoArr[storageCount-1].stor_kind);
+			// printf("%s\n",storageInfoArr[storageCount-1].stor_pwd);
 
 			//sizeup sotrageinfo Array
 			storageCount ++;

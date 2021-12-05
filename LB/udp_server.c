@@ -78,7 +78,6 @@ void *udp_server()
 
             //send storag information to client(storage for that file type)
             char *location = compareExt_getStorKind_DB(ext);
-            printf("b1\n");
             if (strcmp(location, "fail") == 0) //if get location fail, send index0 sotrage information(all information is NOTTHING)
             {
                 sendto(sock, (storageInfo *)&storageInfoArr[0], sizeof(storageInfoArr[0]), 0,
@@ -95,9 +94,7 @@ void *udp_server()
                                (struct sockaddr *)&client_in, sizeof(client_in));
                     }
                 }
-                printf("b3\n");
             }
-            printf("b2\n");
 
             //recv from client success message
             recvfrom(sock, buf, sizeof(buf), 0,
