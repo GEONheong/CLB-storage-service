@@ -76,12 +76,12 @@ int main(int argc, char *argv[])
 			
 			//print storage info
 			strcpy(storageInfoArr[storageCount-1].stor_ip, inet_ntoa(client_addr.sin_addr));
-			// printf("%s\n",storageInfoArr[storageCount-1].stor_filepath);
-			// printf("%s\n",storageInfoArr[storageCount-1].stor_ip);
-			// printf("%s\n",storageInfoArr[storageCount-1].stor_id);
-			// printf("%s\n",storageInfoArr[storageCount-1].stor_pubkey);
-			// printf("%s\n",storageInfoArr[storageCount-1].stor_kind);
-			// printf("%s\n",storageInfoArr[storageCount-1].stor_pwd);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_filepath);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_ip);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_id);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_pubkey);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_kind);
+			printf("%s\n",storageInfoArr[storageCount-1].stor_pwd);
 
 			//sizeup sotrageinfo Array
 			storageCount ++;
