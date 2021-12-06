@@ -278,7 +278,7 @@ _추가_
 >   [none]> CREATE DATABASE getLocation
 >```
 >```sql 
->   [none]> use UserList
+>   use UserList
 >```
 
 
