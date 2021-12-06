@@ -256,7 +256,7 @@ _추가_
 
 ---
 
-### Setting <사전 작업>
+### ※Setting <사전 작업>
 > - CLB로 사용할 머신 사전 작업
 >   - `sudo apt update`
 >   - `sudo apt install docker.io`
@@ -290,8 +290,10 @@ _추가_
 >                   location VARCHAR(100) NOT NULL
 >               );
 >```
-
+>
+>아래 와 같이 아이템을 삽입 합니다
 >```sql
+> INSERT INTO extSet (ext,location) VALUES (... ,...); #예시
 >+------+----------+
 >| ext  | location |
 >+------+----------+
@@ -314,6 +316,9 @@ _추가_
 >| wmv  | video    |
 >+------+----------+
 >```
+>만약 Storage 가 받는 파일의 종류를 바꾸셨다면<br>
+>location에 해당 Storage의 종류를 입력하고, ext에 넣고싶은 확장자를 입력하면 됩니다.
+
 
 
 >- Client 사용자 사전 준비
@@ -324,4 +329,4 @@ _추가_
 
 
 
-### How to change Storage kind <스토리지 저장 파일 종류 바꾸기>
+### ※How to change Storage kind <스토리지 저장 파일 종류 바꾸기>
