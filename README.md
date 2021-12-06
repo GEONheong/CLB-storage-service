@@ -234,7 +234,7 @@ _추가_
 > 2. 작은 on-Premise 환경을 가진 회사도 사용이 가능합니다. 직원들은 편리하게 어디서든 파일에 접근하고, 회사 입장에서도 파일을 통합 관리 할 수 있습니다.
 
 # 5. How to use Project
->- 먼저 [사전 작업](#Setting)을 수행한 뒤 아래 내용을 수행하세요.
+>- 먼저 [사전 작업](#Setting<사전-준비>)을 수행한 뒤 아래 내용을 수행하세요.
 >- 총 4대의 머신(라즈베리파이,컴퓨터)을 준비 합니다.
 >- CLB로 사용할 머신에 `LB` 폴더를 다운 받습니다.
 >- Storage로 사용할 머신들에 각각 `Storage_docs`, `Storage_video`,`Storage_audio` 폴더를 다운 받습니다.
@@ -256,7 +256,7 @@ _추가_
 
 ---
 
-#Setting
+### Setting<사전 준비>
 > - CLB로 사용할 머신 사전 작업
 >   - `sudo apt update`
 >   - `sudo apt install docker.io`
@@ -269,7 +269,7 @@ _추가_
 >   - `sudo systemctl start mairadb_clb` 
 >       - 머신이 꺼지더라도 `mariadb_clb` 컨테이너는 자동으로 다시 실행 됩니다.
 
-> - CLB로 사용할 머신 DB Setting
+> - CLB로 사용할 머신 DB Setting (이 부분은 자동화로 변경 예정)
 >   - `sudo docker exec -it mariadb_clb bash` 컨테이너로 접속
 >   - `mysql -u root -p` 비밀번호 `user` 입력
 >``` sql
@@ -330,3 +330,9 @@ _추가_
 
 
 ### How to change Storage kind <스토리지 저장 파일 종류 바꾸기>
+> 각 스토리지의 `Storage_<>/storage.c` 파일의 4번쨰 라인
+> ```c
+>  strcpy(storageMyInfo.stor_kind, "<원하는 스토리지 종류>"); //수정
+>  strcpy(storageMyInfo.stor_kind, "Image"); //예시
+> ```
+> 와 같이 수정
