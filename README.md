@@ -330,7 +330,7 @@ _추가_
 
 
 ### How to change Storage kind <스토리지 저장 파일 종류 바꾸기>
-> 각 스토리지의 `Storage_<>/storage.c` 파일의 4번쨰 라인
+> 각 스토리지의 `Storage_<>/storage.c` 파일의 42번쨰 라인
 > ```c
 >  strcpy(storageMyInfo.stor_kind, "<원하는 스토리지 종류>"); //수정
 >  strcpy(storageMyInfo.stor_kind, "Image"); //예시
