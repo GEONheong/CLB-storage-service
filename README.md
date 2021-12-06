@@ -278,7 +278,41 @@ _추가_
 >   [none]> CREATE DATABASE getLocation;
 >```
 >``` sql 
->   USE UserList;
+>   [none]> USE UserList;
+>   [UserList]> CREATE TABLE allUserList (
+>               id          VARCHAR(100) NOT NULL PRIMARY KEY,
+>               password    VARCHAR(100) NOT NULL,
+>               join_date   DATETIME     DEFAULT  now()
+>           );
+>   [UserList]> USE getLocation;
+>   [getLocation]> CREATE TABLE extSet (
+>                   ext      VARCHAR(100) NOT NULL PRIMARY KEY,
+>                   location VARCHAR(100) NOT NULL
+>               );
+>```
+
+>```sql
+>+------+----------+
+>| ext  | location |
+>+------+----------+
+>| avi  | video    |
+>| doc  | docs     |
+>| docx | docs     |
+>| flv  | video    |
+>| html | docs     |
+>| hwp  | docs     |
+>| mkv  | video    |
+>| mov  | video    |
+>| mp3  | audio    |
+>| mp4  | video    |
+>| ogg  | audio    |
+>| pdf  | docs     |
+>| raw  | audio    |
+>| txt  | docs     |
+>| wav  | audio    |
+>| wma  | audio    |
+>| wmv  | video    |
+>+------+----------+
 >```
 
 
