@@ -234,11 +234,11 @@ _추가_
 > 2. 작은 on-Premise 환경을 가진 회사도 사용이 가능합니다. 직원들은 편리하게 어디서든 파일에 접근하고, 회사 입장에서도 파일을 통합 관리 할 수 있습니다.
 
 # 5. How to use Project
->- 먼저 [사전 작업](#Setting-<사전작업>)을 수행한 뒤 아래 내용을 수행하세요.
+>- 먼저 [사전 작업](#Setting-<사전-작업>)을 수행한 뒤 아래 내용을 수행하세요.
 >- 총 4대의 머신(라즈베리파이,컴퓨터)을 준비 합니다.
 >- CLB로 사용할 머신에 `LB` 폴더를 다운 받습니다.
 >- Storage로 사용할 머신들에 각각 `Storage_docs`, `Storage_video`,`Storage_audio` 폴더를 다운 받습니다.
->   - `Storage_` 뒤에 붙은 것은 저장할 파일의 종류이고, 만약 저장할 파일의 종류를 바꾸고 싶다면 [여기](#How-to-change-Storage-kind-<스토리지 저장 파일 종류 바꾸기>)를 클릭하세요.
+>   - `Storage_` 뒤에 붙은 것은 저장할 파일의 종류이고, 만약 저장할 파일의 종류를 바꾸고 싶다면 [여기](#How-to-change-Storage-kind-<스토리지-저장-파일-종류-바꾸기>)를 클릭하세요.
 >- 파일 사용자는 `Client` 폴더를 다운 받습니다.
 >- CLB IP를 파악 한 다음. 
 >   - `Clinet/clientMoniter.d/currentStorageInfo.h` 파일의 16번 라인
@@ -249,7 +249,7 @@ _추가_
 >#define LB_IP "<CLB IP>" //수정
 >#define LB_IP "192.168.0.20" //예시
 >```
->- 이후 모든 머신에서 `make` 명령어 수행
+>- 이후 모든 머신에서 `make` 명령어 수행 (컴파일이 수행 됩니다. 혹시 잘 안된다면 `make clean` 명령어 입력후 다시 `make`를 시도하세요.)
 >- CLB머신에서 `LB/startCLB.exe` 실행
 >- Storage 각 머신에서 `Storage_<파일 종류>/startStorage.exe` 실행
 >- 사용자는 `Client/` 에서 `sh ./Geon_StorageService.sh` 명령어 실행하여 서비스를 이용합니다!
@@ -257,6 +257,36 @@ _추가_
 ---
 
 ### Setting <사전 작업>
+> - CLB로 사용할 머신 사전 작업
+>   - `sudo apt update`
+>   - `sudo apt install docker.io`
+>   - 라즈베리파이인 경우
+>       - `sudo docker run --name mariadb_clb -p 3306:3306 -e MYSQL_ROOT_PASSWORD =user -e TZ=Asia/Seoul -d jsurf/rpi-mariadb`
+>   - 일반 머신인 경우
+>       - `sudo docker run --name mariadb_clb -p 3306:3306 -e MYSQL_ROOT_PASSWORD =user -e TZ=Asia/Seoul -d mariadb`
+>   - `/etc/systemd/system/`경로에 `LB/mariadb_clb.service` 파일 복사/넣기
+>   - `sudo systemctl enable mairadb_clb`
+>   - `sudo systemctl start mairadb_clb` 
+>       - 머신이 꺼지더라도 `mariadb_clb` 컨테이너는 자동으로 다시 실행 됩니다.
+
+> - CLB로 사용할 머신 DB Setting
+>   - `sudo docker exec -it mariadb_clb bash` 컨테이너로 접속
+>   - `mysql -u root -p` 비밀번호 `user` 입력
+>```sql
+>   [none]> CREATE DATABASE UserFileList
+>   [none]> CREATE DATABASE UserList
+>   [none]> CREATE DATABASE getLocation
+>```
+>```sql 
+>   [none]> use UserList
+>```
+
+
+>- Client 사용자 사전 준비
+>   - `sudo apt update`
+>   - `sudo apt install sshd`
+>   - `sudo apt install sshpass`
+
 
 
 
