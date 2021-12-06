@@ -272,13 +272,13 @@ _추가_
 > - CLB로 사용할 머신 DB Setting
 >   - `sudo docker exec -it mariadb_clb bash` 컨테이너로 접속
 >   - `mysql -u root -p` 비밀번호 `user` 입력
->~~~ sql
->   [none]> CREATE DATABASE UserFileList
->   [none]> CREATE DATABASE UserList
->   [none]> CREATE DATABASE getLocation
->~~~
->```sql 
->   USE UserList
+>``` sql
+>   [none]> CREATE DATABASE UserFileList;
+>   [none]> CREATE DATABASE UserList;
+>   [none]> CREATE DATABASE getLocation;
+>```
+>``` sql 
+>   USE UserList;
 >```
 
 
