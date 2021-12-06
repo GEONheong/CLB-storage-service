@@ -234,7 +234,7 @@ _추가_
 > 2. 작은 on-Premise 환경을 가진 회사도 사용이 가능합니다. 직원들은 편리하게 어디서든 파일에 접근하고, 회사 입장에서도 파일을 통합 관리 할 수 있습니다.
 
 # 5. How to use Project
->- 먼저 [사전 작업](###-Setting-<사전-작업>)을 수행한 뒤 아래 내용을 수행하세요.
+>- 먼저 [사전 작업](#Setting)을 수행한 뒤 아래 내용을 수행하세요.
 >- 총 4대의 머신(라즈베리파이,컴퓨터)을 준비 합니다.
 >- CLB로 사용할 머신에 `LB` 폴더를 다운 받습니다.
 >- Storage로 사용할 머신들에 각각 `Storage_docs`, `Storage_video`,`Storage_audio` 폴더를 다운 받습니다.
@@ -256,7 +256,7 @@ _추가_
 
 ---
 
-### Setting <사전 작업>
+#Setting
 > - CLB로 사용할 머신 사전 작업
 >   - `sudo apt update`
 >   - `sudo apt install docker.io`
