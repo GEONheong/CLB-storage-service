@@ -238,7 +238,7 @@ _추가_
 >- 총 4대의 머신(라즈베리파이,컴퓨터)을 준비 합니다.
 >- CLB로 사용할 머신에 `LB` 폴더를 다운 받습니다.
 >- Storage로 사용할 머신들에 각각 `Storage_docs`, `Storage_video`,`Storage_audio` 폴더를 다운 받습니다.
->   - `Storage_` 뒤에 붙은 것은 저장할 파일의 종류이고, 만약 저장할 파일의 종류를 바꾸고 싶다면 [여기](./Change_Storage_kind.md)를 클릭하세요.
+>   - `Storage_` 뒤에 붙은 것은 저장할 파일의 종류이고, 만약 저장할 파일의 종류를 바꾸고 싶다면 [여기](./Change_Storage_Kind.md)를 클릭하세요.
 >- 파일 사용자는 `Client` 폴더를 다운 받습니다.
 >- CLB IP를 파악 한 다음. 
 >   - `Clinet/clientMoniter.d/currentStorageInfo.h` 파일의 16번 라인
